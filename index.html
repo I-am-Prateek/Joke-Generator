@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Generator</title>
+    <style>
+       
+       #main-container {
+            width: 100%;
+            min-height: 700px;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+        }
+        body img{
+            width: 100%;
+            height:700px ;
+            background-size: cover;
+        }
+        .myh{
+          padding: 10px 350px;
+        }
+        .my-btn {
+            padding: 10px 25px;
+            background-color: #031e27;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            }
+
+        .my-btn:hover {
+            background-color: #2980b9; 
+         }
+         .buttons{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+         }
+         #joke{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 40px 0;
+         }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <div style="background-image: url('bg-1.jpg'); height: 700px; width:  1000px;">
+            <h1 class="myh">Joke Generator</h1>
+            <h5 class="myh">Select The Joke Category You Want</h5>
+            <div class="buttons">
+                <button class="my-btn" type="button" onclick="myfunction('food')">Food</button>
+                <button class="my-btn" type="button" onclick="myfunction('animal')">Animal</button>
+                <button class="my-btn" type="button" onclick="myfunction('money')">Money</button>
+                <button class="my-btn" type="button" onclick="myfunction('history')">History</button>
+                <button class="my-btn" type="button" onclick="myfunction('music')">Music</button>
+                <button class="my-btn" type="button" onclick="myfunction('religion')">Religion</button>
+                <button class="my-btn" type="button" onclick="myfunction('science')">Science</button>
+            </div> 
+            <p id="joke"></p>
+            
+          </div>     
+    </div>
+    <script>
+        function myfunction(categories){
+            fetch('https://api.chucknorris.io/jokes/random?category='+categories)
+            .then(response=>response.json())
+            .then(json => document.getElementById("joke").innerHTML=json.value)
+            .catch(error => console.log('unable to reach URL'+error));
+        }
+    </script>
+</body>
+</html>
